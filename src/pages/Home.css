@@ -1,0 +1,129 @@
+.home-container {
+  position: relative;
+  min-height: calc(100vh - 71px);
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+}
+
+.portal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.portal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  opacity: 0.3;
+  animation: portalPulse 4s ease-in-out infinite;
+}
+
+.portal-ring {
+  fill: none;
+  stroke: url(#portalGradient);
+  stroke-width: 2;
+  animation: portalSpin 8s linear infinite;
+  transform-origin: center;
+}
+
+.portal-ring-1 {
+  animation-duration: 8s;
+}
+
+.portal-ring-2 {
+  animation-duration: 6s;
+  animation-direction: reverse;
+}
+
+.portal-ring-3 {
+  animation-duration: 10s;
+}
+
+.portal-core {
+  fill: url(#portalGradient);
+  animation: portalCorePulse 3s ease-in-out infinite;
+}
+
+@keyframes portalSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes portalPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes portalCorePulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.floating-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff88, 0 0 20px #00ccff;
+  animation: floatStar 5s ease-in-out infinite;
+}
+
+@keyframes floatStar {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1.5);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .portal {
+    width: 300px;
+    height: 300px;
+  }
+
+  .home-container {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+/* Add some glow effects */
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
+  }
+}
