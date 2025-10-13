@@ -8,18 +8,25 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
+import { Pagination } from "../components/Pagination";
 import { fetchFromAPI } from "../utils/api";
 import type { Character, ApiResponse } from "../types/api";
 
 export const Characters = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageInfo, setPageInfo] = useState({ count: 0, pages: 0 });
 
   useEffect(() => {
     const loadCharacters = async () => {
+      setLoading(true);
       try {
-        const data = await fetchFromAPI<ApiResponse<Character>>("/character");
+        const data = await fetchFromAPI<ApiResponse<Character>>(
+          `/character?page=${currentPage}`
+        );
         setCharacters(data.results);
+        setPageInfo({ count: data.info.count, pages: data.info.pages });
       } catch (error) {
         console.error("Failed to fetch characters:", error);
       } finally {
@@ -28,7 +35,7 @@ export const Characters = () => {
     };
 
     loadCharacters();
-  }, []);
+  }, [currentPage]);
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -77,6 +84,12 @@ export const Characters = () => {
           />
         ))}
       </SimpleGrid>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={pageInfo.pages}
+        onPageChange={setCurrentPage}
+      />
     </Container>
   );
 };
