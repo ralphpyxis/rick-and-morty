@@ -10,3 +10,12 @@ export async function fetchFromAPI<T>(endpoint: string): Promise<T> {
     return response.json();
 }
 
+export function buildQueryString(params: Record<string, string | number | undefined>): string {
+    const queryParams = Object.entries(params)
+        .filter(([, value]) => value !== '' && value !== null && value !== undefined)
+        .map(([key, value]) => `${key}=${encodeURIComponent(value as string | number)}`)
+        .join('&');
+
+    return queryParams ? `?${queryParams}` : '';
+}
+
