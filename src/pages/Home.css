@@ -2,6 +2,13 @@
   position: relative;
   min-height: calc(100vh - 71px);
   overflow: hidden;
+}
+
+[data-mantine-color-scheme="light"] .home-container {
+  background: linear-gradient(135deg, #e7f5ff 0%, #d0ebff 100%);
+}
+
+[data-mantine-color-scheme="dark"] .home-container {
   background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
 }
 
@@ -87,10 +94,18 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background: #00ff88;
   border-radius: 50%;
-  box-shadow: 0 0 10px #00ff88, 0 0 20px #00ccff;
   animation: floatStar 5s ease-in-out infinite;
+}
+
+[data-mantine-color-scheme="light"] .floating-star {
+  background: #1971c2;
+  box-shadow: 0 0 10px #1971c2, 0 0 20px #228be6;
+}
+
+[data-mantine-color-scheme="dark"] .floating-star {
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88, 0 0 20px #00ccff;
 }
 
 @keyframes floatStar {
