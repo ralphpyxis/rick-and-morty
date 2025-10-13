@@ -15,9 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { IconUsers, IconMapPin, IconSparkles } from "@tabler/icons-react";
 import "./Home.css";
 
-const MotionBox = motion.create(Box);
-const MotionCard = motion.create(Card);
-
 export const Home = () => {
   const navigate = useNavigate();
 
@@ -100,7 +97,8 @@ export const Home = () => {
 
       <Container size="lg" py={80} style={{ position: "relative", zIndex: 1 }}>
         {/* Hero Section */}
-        <MotionBox
+        <Box
+          component={motion.div}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -132,7 +130,8 @@ export const Home = () => {
             </Title>
           </motion.div>
 
-          <MotionBox
+          <Box
+            component={motion.div}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -170,14 +169,15 @@ export const Home = () => {
                 </Button>
               </motion.div>
             </Group>
-          </MotionBox>
-        </MotionBox>
+          </Box>
+        </Box>
 
         {/* Feature Cards */}
         <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="xl" mt={60}>
           {features.map((feature, index) => (
-            <MotionCard
+            <Card
               key={feature.title}
+              component={motion.div}
               shadow="md"
               radius="lg"
               padding="xl"
@@ -215,12 +215,13 @@ export const Home = () => {
               <Text size="sm" c="dimmed">
                 {feature.description}
               </Text>
-            </MotionCard>
+            </Card>
           ))}
         </SimpleGrid>
 
         {/* Floating Dimension Text */}
-        <MotionBox
+        <Box
+          component={motion.div}
           mt={80}
           style={{ textAlign: "center" }}
           initial={{ opacity: 0 }}
@@ -242,7 +243,7 @@ export const Home = () => {
               Dub!"
             </Text>
           </motion.div>
-        </MotionBox>
+        </Box>
       </Container>
     </Box>
   );
