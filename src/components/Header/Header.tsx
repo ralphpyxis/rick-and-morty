@@ -1,18 +1,29 @@
-import { Flex } from "@mantine/core";
+import { Flex, Title, Anchor } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
     <Flex
       p="20px 40px"
       justify="space-between"
+      align="center"
       style={{
-        borderBottom: "1px solid white",
+        borderBottom: "1px solid #e9ecef",
+        backgroundColor: "#f8f9fa",
       }}
     >
-      <p>Rick and morty</p>
-      <Flex gap="md">
-        <p>Characters</p>
-        <p>Locations</p>
+      <Anchor component={Link} to="/" style={{ textDecoration: "none" }}>
+        <Title order={2} c="blue">
+          Rick and Morty
+        </Title>
+      </Anchor>
+      <Flex gap="xl">
+        <Anchor component={Link} to="/characters" size="lg" fw={500} c="dark">
+          Characters
+        </Anchor>
+        <Anchor component={Link} to="/locations" size="lg" fw={500} c="dark">
+          Locations
+        </Anchor>
       </Flex>
     </Flex>
   );
