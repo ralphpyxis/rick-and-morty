@@ -8,18 +8,25 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
+import { Pagination } from "../components/Pagination";
 import { fetchFromAPI } from "../utils/api";
 import type { Location, ApiResponse } from "../types/api";
 
 export const Locations = () => {
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageInfo, setPageInfo] = useState({ count: 0, pages: 0 });
 
   useEffect(() => {
     const loadLocations = async () => {
+      setLoading(true);
       try {
-        const data = await fetchFromAPI<ApiResponse<Location>>("/location");
+        const data = await fetchFromAPI<ApiResponse<Location>>(
+          `/location?page=${currentPage}`
+        );
         setLocations(data.results);
+        setPageInfo({ count: data.info.count, pages: data.info.pages });
       } catch (error) {
         console.error("Failed to fetch locations:", error);
       } finally {
@@ -28,7 +35,7 @@ export const Locations = () => {
     };
 
     loadLocations();
-  }, []);
+  }, [currentPage]);
 
   if (loading) {
     return (
@@ -65,6 +72,12 @@ export const Locations = () => {
           />
         ))}
       </SimpleGrid>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={pageInfo.pages}
+        onPageChange={setCurrentPage}
+      />
     </Container>
   );
 };
