@@ -9,6 +9,7 @@ import {
   ThemeIcon,
   rem,
   Box,
+  useComputedColorScheme,
 } from "@mantine/core";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ import "./Home.css";
 
 export const Home = () => {
   const navigate = useNavigate();
+  const computedColorScheme = useComputedColorScheme("light");
 
   const features = [
     {
@@ -54,9 +56,27 @@ export const Home = () => {
         >
           <defs>
             <radialGradient id="portalGradient">
-              <stop offset="0%" stopColor="#00ff88" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#00ccff" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#0066ff" stopOpacity="0.3" />
+              <stop
+                offset="0%"
+                stopColor={
+                  computedColorScheme === "dark" ? "#00ff88" : "#1971c2"
+                }
+                stopOpacity="0.8"
+              />
+              <stop
+                offset="50%"
+                stopColor={
+                  computedColorScheme === "dark" ? "#00ccff" : "#228be6"
+                }
+                stopOpacity="0.6"
+              />
+              <stop
+                offset="100%"
+                stopColor={
+                  computedColorScheme === "dark" ? "#0066ff" : "#1864ab"
+                }
+                stopOpacity="0.3"
+              />
             </radialGradient>
           </defs>
           <circle
@@ -120,7 +140,10 @@ export const Home = () => {
               fw={900}
               mb="md"
               style={{
-                background: "linear-gradient(45deg, #00ff88, #00ccff)",
+                background:
+                  computedColorScheme === "dark"
+                    ? "linear-gradient(45deg, #00ff88, #00ccff)"
+                    : "linear-gradient(45deg, #1971c2, #228be6)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -186,11 +209,13 @@ export const Home = () => {
               transition={{ delay: 0.5 + index * 0.2, duration: 0.6 }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 20px 40px rgba(0, 200, 255, 0.3)",
+                boxShadow:
+                  computedColorScheme === "dark"
+                    ? "0 20px 40px rgba(0, 200, 255, 0.3)"
+                    : "0 20px 40px rgba(25, 113, 194, 0.3)",
               }}
               style={{
                 cursor: "pointer",
-                background: "rgba(255, 255, 255, 0.9)",
               }}
               onClick={() => navigate(feature.path)}
             >
